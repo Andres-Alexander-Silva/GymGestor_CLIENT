@@ -1,4 +1,4 @@
-import React from "react";
+
 import logo from "../../global/assets/logo.png";
 import { IoMdHome } from "react-icons/io";
 import { Link } from "react-router-dom";

@@ -1,4 +1,4 @@
-import React from "react";
+
 import logo from "../../global/assets/logo.png";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 

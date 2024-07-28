@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React  from "react";
 import { FaCheck, FaPlus } from "react-icons/fa";
 
 type Benefit = {
@@ -34,7 +34,7 @@ const plans: Plan[] = [
 ];
 
 const MembershipPlans: React.FC = () => {
-  const [selectedPlan, setSelectedPlan] = useState<number | null>(null);
+ // const [selectedPlan, setSelectedPlan] = useState<number | null>(null);
 
   return (
     <section className="py-14">
