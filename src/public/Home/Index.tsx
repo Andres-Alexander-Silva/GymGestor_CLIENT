@@ -1,6 +1,6 @@
 
-import HeaderHome from "../../Components/Header/HeaderHome";
-import Footer from "../../Components/Footer/Footer";
+import HeaderHome from "../../global/components/HeaderHome";
+import Footer from "../../global/components/Footer";
 import Clases from "./Components/Clases";
 
 const Home = () => {

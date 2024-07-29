@@ -2,9 +2,9 @@ import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { Route, Routes, Navigate } from "react-router-dom";
-import Home from "./View/Home/Index";
-import Planes from "./View/Planes/Index";
-import QuienesSomos from "./View/QuienesSomos/Index";
+import Home from "./public/Home/Index";
+import Planes from "./public/Planes/Index";
+import QuienesSomos from "./public/QuienesSomos/Index";
 
 function App() {
   return (
