@@ -12,7 +12,7 @@ export const useStylesModal = () => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: isSmall ? "90vw" : isMedium ? "35vw" : isCustom ? "50vw" : "35vw",
+    width: isSmall ? "90vw" : isMedium ? "35vw" : isCustom ? "50vw" : "45vw",
     bgcolor: "#FFFFFF",
     borderRadius: 1,
     boxShadow: 24,
@@ -37,7 +37,7 @@ export const useStylesModal2 = () => {
     boxShadow: 24,
     p: 4,
     overflowY: "auto",
-    height: "80vh",
+    height: "65vh",
   };
 };
 

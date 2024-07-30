@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 
 export const gymApi = axios.create({
-  baseURL: import.meta.env.VITE_API_BACKEND_URL_DEV,
+  baseURL: import.meta.env.VITE_API_BACKEND_URL,
 });
 
 gymApi.interceptors.response.use(

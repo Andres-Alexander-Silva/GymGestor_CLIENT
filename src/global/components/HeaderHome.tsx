@@ -1,4 +1,4 @@
-
+import { Button } from "@mui/material";
 import logo from "../../global/assets/logo.png";
 import { IoMdHome } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -14,18 +14,33 @@ const HeaderHome = () => {
           </span>
         </div>
         <div className="flex items-center space-x-4">
-          <button className="bg-red-700 text-xs text-white font-bold py-1 px-4 rounded-full hover:bg-red-900">
-            Iniciar sesión
-          </button>
+          <Link to="/login" style={{ textDecoration: "none"}}>
+            <Button
+              sx={{
+                backgroundColor: "#e11d48",
+                color: "#ffffff",
+                fontSize: "0.75rem",
+                fontWeight: "bold",
+                paddingY: "0.25rem",
+                paddingX: "1rem",
+                borderRadius: "9999px",
+                "&:hover": {
+                  backgroundColor: "#b91c1c",
+                },
+              }}
+            >
+              Iniciar sesión
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="w-full bg-gray-700 flex justify-between px-4 py-2">
         <Link to="/" className="text-white text-xl hover:text-gray-300">
-          <IoMdHome  />
+          <IoMdHome />
         </Link>
         <div className="flex space-x-4">
-          <Link to="/planes" className="text-white hover:text-gray-300">
-            Planes
+          <Link to="/membresias" className="text-white hover:text-gray-300">
+            Membresias
           </Link>
           <Link to="/quienes-somos" className="text-white hover:text-gray-300">
             Quienes somos
