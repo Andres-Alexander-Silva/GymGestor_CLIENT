@@ -57,16 +57,19 @@ export const LoginProvider = ({ children }: LoginProviderProps) => {
       } else {
         cookies.set("token", data.token, { path: "/" });
         localStorage.setItem("user", data.response.username);
+        localStorage.setItem("cedula", data.response.cedula);
+        localStorage.setItem("entrenador_id", data.response.entrenador_id);
         localStorage.setItem("nameComplete", data.response.nombres + " " + data.response.apellidos)
         localStorage.setItem("rol_name", data.response.rol_name);
         localStorage.setItem("rol_id", data.response.rol_id);
         toast.success("Bienvenido!!");
         navigate("/inicio");
       }
-      setLoading(false);
     } catch (error: any) {
       setLoading(false);
       toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
 

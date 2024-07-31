@@ -10,7 +10,7 @@ import {
   Tooltip,
   IconButton,
 } from "@mui/material";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { UsuariosContext } from "../context/UsuariosContext";
 import useTable from "../../../hooks/useTable";
 import Alerta from "../../../global/utils/alerta";
@@ -27,6 +27,7 @@ const columns = [
   { id: "peso", label: "Peso" },
   { id: "estatura", label: "Estatura" },
   { id: "rol", label: "Rol" },
+  { id: "estado", label: "Estado" },
   { id: "acciones", label: "acciones" },
 ];
 
@@ -40,20 +41,15 @@ const TableUsuarios = ({ searchUsuarios }: TableUsuariosProps) => {
     handleOpenModalInfo,
     usuarios,
     getUsuarioInfo,
-    getUsuarios,
     deleteUsuario,
   } = useContext(UsuariosContext);
   const { handleChangePage, handleChangeRowsPerPage, page, rowsPerPage } =
     useTable();
 
-  const handleOpenModal= (id: number) => {
+  const handleOpenModal = (id: string) => {
     handleOpenModalInfo();
     getUsuarioInfo(id);
   };
-
-  useEffect(() => {
-    getUsuarios();
-  }, []);
 
   return (
     <>
@@ -100,7 +96,16 @@ const TableUsuarios = ({ searchUsuarios }: TableUsuariosProps) => {
                       <TableCell align="center">{usuario.direccion}</TableCell>
                       <TableCell align="center">{usuario.peso}</TableCell>
                       <TableCell align="center">{usuario.estatura}</TableCell>
-                      <TableCell align="center">{usuario.rol_id === 1 ? "ADMINISTRADOR" : usuario.rol_id === 2 ? "CLIENTE" : "ENTRENADOR"}</TableCell>
+                      <TableCell align="center">
+                        {usuario.rol_id === 1
+                          ? "ADMINISTRADOR"
+                          : usuario.rol_id === 2
+                          ? "CLIENTE"
+                          : "ENTRENADOR"}
+                      </TableCell>
+                      <TableCell align="center">
+                        {usuario.estado === true ? "ACTIVO" : "INACTIVO"}
+                      </TableCell>
                       <TableCell align="center">
                         <Tooltip title="Editar" color="warning">
                           <IconButton

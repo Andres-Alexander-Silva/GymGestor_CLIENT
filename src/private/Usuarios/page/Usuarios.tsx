@@ -1,8 +1,21 @@
 import { useContext, useState } from "react";
 import { MdOutlineSearch } from "react-icons/md";
-import { ModalCreateUsuario, TableUsuarios } from "../components";
+import {
+  ModalCreateUsuario,
+  ModalInfoUsuario,
+  TableUsuarios,
+} from "../components";
 import { UsuariosContext } from "../context/UsuariosContext";
-import { Box, Button, Card, InputAdornment, OutlinedInput, Stack, SvgIcon, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  InputAdornment,
+  OutlinedInput,
+  Stack,
+  SvgIcon,
+  Typography,
+} from "@mui/material";
 
 const Usuarios = () => {
   const { handleOpenModalCreate, usuarios } = useContext(UsuariosContext);
@@ -67,6 +80,7 @@ const Usuarios = () => {
         <TableUsuarios searchUsuarios={searchUsuarios} />
       </Stack>
       <ModalCreateUsuario />
+      <ModalInfoUsuario />
     </Stack>
   );
 };

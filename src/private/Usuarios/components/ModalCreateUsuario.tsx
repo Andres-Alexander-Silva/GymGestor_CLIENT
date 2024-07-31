@@ -9,11 +9,12 @@ import {
   Grid,
   MenuItem,
 } from "@mui/material";
-import { Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useStylesModal2 } from "../../../utils/modal/useStyleModal";
 import { useContext, useState } from "react";
 import { UsuariosContext } from "../context/UsuariosContext";
 import ModalLoader from "../../../global/components/ModalLoader";
+import { UsuarioCreate } from "../interface/usuarios.interfaces";
 
 const ModalCreateUsuario = () => {
   const {
@@ -24,16 +25,20 @@ const ModalCreateUsuario = () => {
     openModalCreate,
     handleCloseModalCreate,
     createUsuario,
-    methodsUsuario,
   } = useContext(UsuariosContext);
   const [rol, setRol] = useState("");
+  const methodsUsuario = useForm<UsuarioCreate>()
 
   const styles = useStylesModal2();
 
-  const onSubmit = (data: any) => {
+  const onSubmitForm = (data: any) => {
+    data.rol_id = parseInt(rol);
     console.log(data);
-    //createUsuario(data);
+    createUsuario(data);
+    methodsUsuario.reset();
   };
+
+  if (loading) return <ModalLoader />;
 
   return (
     <Modal
@@ -61,7 +66,7 @@ const ModalCreateUsuario = () => {
           >
             Crear Usuario
           </Typography>
-          <form onSubmit={methodsUsuario.handleSubmit(onSubmit)}>
+          <form onSubmit={methodsUsuario.handleSubmit(onSubmitForm)}>
             <Grid container rowSpacing={2} columnSpacing={2}>
               <Grid item xs={4}>
                 <Controller
@@ -82,10 +87,10 @@ const ModalCreateUsuario = () => {
                       variant="outlined"
                       fullWidth
                       required
-                      error={!!methodsUsuario?.errors?.cedula}
+                      error={!!methodsUsuario?.formState?.errors?.cedula}
                       helperText={
-                        methodsUsuario?.errors?.cedula
-                          ? methodsUsuario.errors.cedula.message
+                        methodsUsuario?.formState?.errors?.cedula
+                          ? methodsUsuario?.formState?.errors?.cedula.message
                           : null
                       }
                     />
@@ -110,10 +115,10 @@ const ModalCreateUsuario = () => {
                       onChange={(e) =>
                         field.onChange(e.target.value.toUpperCase())
                       }
-                      error={!!methodsUsuario?.errors?.nombre}
+                      error={!!methodsUsuario?.formState?.errors?.nombre}
                       helperText={
-                        methodsUsuario?.errors?.nombre
-                          ? methodsUsuario.errors.nombre.message
+                        methodsUsuario?.formState?.errors?.nombre
+                          ? methodsUsuario?.formState?.errors?.nombre.message
                           : null
                       }
                     />
@@ -138,10 +143,10 @@ const ModalCreateUsuario = () => {
                       onChange={(e) =>
                         field.onChange(e.target.value.toUpperCase())
                       }
-                      error={!!methodsUsuario?.errors?.apellido}
+                      error={!!methodsUsuario?.formState?.errors?.apellido}
                       helperText={
-                        methodsUsuario?.errors?.apellido
-                          ? methodsUsuario.errors.apellido.message
+                        methodsUsuario?.formState?.errors?.apellido
+                          ? methodsUsuario?.formState?.errors?.apellido.message
                           : null
                       }
                     />
@@ -163,10 +168,10 @@ const ModalCreateUsuario = () => {
                       variant="outlined"
                       fullWidth
                       required
-                      error={!!methodsUsuario?.errors?.username}
+                      error={!!methodsUsuario?.formState?.errors?.username}
                       helperText={
-                        methodsUsuario?.errors?.username
-                          ? methodsUsuario.errors.username.message
+                        methodsUsuario?.formState?.errors?.username
+                          ? methodsUsuario?.formState?.errors?.username.message
                           : null
                       }
                     />
@@ -188,10 +193,10 @@ const ModalCreateUsuario = () => {
                       variant="outlined"
                       fullWidth
                       required
-                      error={!!methodsUsuario?.errors?.password}
+                      error={!!methodsUsuario?.formState?.errors?.password}
                       helperText={
-                        methodsUsuario?.errors?.password
-                          ? methodsUsuario.errors.password.message
+                        methodsUsuario?.formState?.errors?.password
+                          ? methodsUsuario?.formState?.errors?.password.message
                           : null
                       }
                     />
@@ -217,10 +222,10 @@ const ModalCreateUsuario = () => {
                       variant="outlined"
                       fullWidth
                       required
-                      error={!!methodsUsuario?.errors?.telefono}
+                      error={!!methodsUsuario?.formState?.errors?.telefono}
                       helperText={
-                        methodsUsuario?.errors?.telefono
-                          ? methodsUsuario.errors.telefono.message
+                        methodsUsuario?.formState?.errors?.telefono
+                          ? methodsUsuario?.formState?.errors?.telefono.message
                           : null
                       }
                     />
@@ -246,10 +251,10 @@ const ModalCreateUsuario = () => {
                       variant="outlined"
                       fullWidth
                       required
-                      error={!!methodsUsuario?.errors?.email}
+                      error={!!methodsUsuario?.formState?.errors?.correo}
                       helperText={
-                        methodsUsuario?.errors?.email
-                          ? methodsUsuario.errors.email.message
+                        methodsUsuario?.formState?.errors?.correo
+                          ? methodsUsuario?.formState?.errors?.correo.message
                           : null
                       }
                     />
@@ -260,7 +265,7 @@ const ModalCreateUsuario = () => {
                 <Controller
                   name="peso"
                   control={methodsUsuario.control}
-                  defaultValue={""}
+                  defaultValue={0.0}
                   rules={{
                     required: "Campo requerido",
                   }}
@@ -272,10 +277,10 @@ const ModalCreateUsuario = () => {
                       type="number"
                       fullWidth
                       required
-                      error={!!methodsUsuario?.errors?.peso}
+                      error={!!methodsUsuario?.formState?.errors?.peso}
                       helperText={
-                        methodsUsuario?.errors?.peso
-                          ? methodsUsuario.errors.peso.message
+                        methodsUsuario?.formState?.errors?.peso
+                          ? methodsUsuario?.formState?.errors?.peso.message
                           : null
                       }
                     />
@@ -286,7 +291,7 @@ const ModalCreateUsuario = () => {
                 <Controller
                   name="estatura"
                   control={methodsUsuario.control}
-                  defaultValue={""}
+                  defaultValue={0.0}
                   rules={{
                     required: "Campo requerido",
                   }}
@@ -298,10 +303,10 @@ const ModalCreateUsuario = () => {
                       type="number"
                       fullWidth
                       required
-                      error={!!methodsUsuario?.errors?.estatura}
+                      error={!!methodsUsuario?.formState?.errors?.estatura}
                       helperText={
-                        methodsUsuario?.errors?.estatura
-                          ? methodsUsuario.errors.estatura.message
+                        methodsUsuario?.formState?.errors?.estatura
+                          ? methodsUsuario?.formState?.errors?.estatura.message
                           : null
                       }
                     />
@@ -326,10 +331,10 @@ const ModalCreateUsuario = () => {
                       onChange={(e) =>
                         field.onChange(e.target.value.toUpperCase())
                       }
-                      error={!!methodsUsuario?.errors?.direccion}
+                      error={!!methodsUsuario?.formState?.errors?.direccion}
                       helperText={
-                        methodsUsuario?.errors?.direccion
-                          ? methodsUsuario.errors.direccion.message
+                        methodsUsuario?.formState?.errors?.direccion
+                          ? methodsUsuario?.formState?.errors?.direccion.message
                           : null
                       }
                     />
@@ -340,7 +345,7 @@ const ModalCreateUsuario = () => {
                 <Controller
                   name="rol_id"
                   control={methodsUsuario.control}
-                  defaultValue={""}
+                  defaultValue={0}
                   rules={{
                     required: "Campo requerido",
                   }}
@@ -352,11 +357,12 @@ const ModalCreateUsuario = () => {
                       variant="outlined"
                       fullWidth
                       required
-                      error={!!methodsUsuario?.errors?.rol}
+                      value={rol}
+                      error={!!methodsUsuario?.formState?.errors?.rol_id}
                       onChange={(e) => setRol(e.target.value)}
                       helperText={
-                        methodsUsuario?.errors?.rol
-                          ? methodsUsuario.errors.rol.message
+                        methodsUsuario?.formState?.errors?.rol_id
+                          ? methodsUsuario?.formState?.errors?.rol_id.message
                           : null
                       }
                     >
@@ -376,9 +382,6 @@ const ModalCreateUsuario = () => {
                       name="especialidad"
                       control={methodsUsuario.control}
                       defaultValue={""}
-                      rules={{
-                        required: "Campo requerido",
-                      }}
                       render={({ field }) => (
                         <TextField
                           {...field}
@@ -388,12 +391,6 @@ const ModalCreateUsuario = () => {
                           required
                           onChange={(e) =>
                             field.onChange(e.target.value.toUpperCase())
-                          }
-                          error={!!methodsUsuario?.errors?.especialidad}
-                          helperText={
-                            methodsUsuario?.errors?.especialidad
-                              ? methodsUsuario.errors.especialidad.message
-                              : null
                           }
                         />
                       )}
@@ -405,7 +402,7 @@ const ModalCreateUsuario = () => {
                 <Controller
                   name="entrenador_id"
                   control={methodsUsuario.control}
-                  defaultValue={""}
+                  defaultValue={0}
                   rules={{
                     required: "Campo requerido",
                   }}
@@ -417,10 +414,10 @@ const ModalCreateUsuario = () => {
                       variant="outlined"
                       fullWidth
                       required
-                      error={!!methodsUsuario?.errors?.entrenador}
+                      error={!!methodsUsuario?.formState?.errors?.entrenador_id}
                       helperText={
-                        methodsUsuario?.errors?.entrenador
-                          ? methodsUsuario.errors.entrenador.message
+                        methodsUsuario?.formState?.errors?.entrenador_id
+                          ? methodsUsuario?.formState?.errors?.entrenador_id.message
                           : null
                       }
                     >
@@ -438,7 +435,7 @@ const ModalCreateUsuario = () => {
                 <Controller
                   name="membresia_id"
                   control={methodsUsuario.control}
-                  defaultValue={""}
+                  defaultValue={0}
                   rules={{
                     required: "Campo requerido",
                   }}
@@ -450,13 +447,14 @@ const ModalCreateUsuario = () => {
                       variant="outlined"
                       fullWidth
                       required
-                      error={!!methodsUsuario?.errors?.membresia}
+                      error={!!methodsUsuario?.formState?.errors?.membresia_id}
                       helperText={
-                        methodsUsuario?.errors?.membresia
-                          ? methodsUsuario.errors.membresia.message
+                        methodsUsuario?.formState?.errors?.membresia_id
+                          ? methodsUsuario?.formState?.errors?.membresia_id.message
                           : null
                       }
                     >
+                      <MenuItem value={0}>NINGUNA</MenuItem>
                       {membresias.map((membresia) => (
                         <MenuItem key={membresia.id} value={membresia.id}>
                           {membresia.nombre}
@@ -471,7 +469,7 @@ const ModalCreateUsuario = () => {
                   sx={{
                     display: "flex",
                     gap: 2,
-                    mt: 3
+                    mt: 3,
                   }}
                 >
                   <Button

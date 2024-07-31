@@ -12,6 +12,7 @@ export interface Usuario {
   especialidad: string;
   entrenador_id: number;
   rol_id: number;
+  estado: boolean;
 }
 
 export interface UsuarioCreate {
@@ -46,6 +47,8 @@ export interface UsuarioUpdate {
   especialidad: string;
   entrenador_id: number;
   password: string;
+  estado: boolean;
+  membrese_id: number;
 }
 
 export interface Rol {

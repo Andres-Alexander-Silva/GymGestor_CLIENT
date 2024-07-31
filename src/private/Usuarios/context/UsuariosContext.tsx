@@ -11,7 +11,6 @@ import {
 } from "../interface/usuarios.interfaces";
 import Cookies from "universal-cookie";
 import Swal from "sweetalert2";
-import { useForm } from "react-hook-form";
 
 interface UsuariosProviderProps {
   children: React.ReactNode;
@@ -22,7 +21,6 @@ interface UsuariosContextProps {
   openModalCreate: boolean;
   openModalInfo: boolean;
   usuarios: Usuario[];
-  methodsUsuario: any;
   currentUsuario: Usuario;
   roles: Rol[];
   entrenadores: Entrenador[];
@@ -36,8 +34,8 @@ interface UsuariosContextProps {
   getEntrenadores: () => void;
   getMembresias: () => void;
   createUsuario: (dataForm: UsuarioCreate) => void;
-  getUsuarioInfo: (id: number) => void;
-  updateUsuario: (id: number, dataForm: UsuarioUpdate) => void;
+  getUsuarioInfo: (id: string) => void;
+  updateUsuario: (id: string, dataForm: UsuarioUpdate) => void;
   deleteUsuario: (id: number) => void;
 }
 
@@ -46,7 +44,6 @@ export const UsuariosContext = createContext<UsuariosContextProps>({
   openModalCreate: false,
   openModalInfo: false,
   usuarios: [],
-  methodsUsuario: {},
   currentUsuario: {} as Usuario,
   roles: [],
   entrenadores: [],
@@ -76,7 +73,6 @@ export const UsuariosProvider = ({ children }: UsuariosProviderProps) => {
   const [roles, setRoles] = useState<Rol[]>([]);
   const [entrenadores, setEntrenadores] = useState<Entrenador[]>([]);
   const [membresias, setMembresias] = useState<Membresia[]>([]);
-  const methodsUsuario = useForm<UsuarioCreate>();
 
   const handleOpenModalCreate = () => {
     setOpenModalCreate(true);
@@ -108,7 +104,7 @@ export const UsuariosProvider = ({ children }: UsuariosProviderProps) => {
     }
   };
 
-  const getUsuarioInfo = async (id: number) => {
+  const getUsuarioInfo = async (id: string) => {
     try {
       setLoading(true);
       const token = cookies.get("token");
@@ -128,7 +124,8 @@ export const UsuariosProvider = ({ children }: UsuariosProviderProps) => {
 
   const getRoles = async () => {
     try {
-      const { data } = await UsuariosServices.getRoles();
+      const token = cookies.get("token");
+      const { data } = await UsuariosServices.getRoles(token);
       setRoles(data);
     } catch (error) {
       console.error(error);
@@ -172,7 +169,7 @@ export const UsuariosProvider = ({ children }: UsuariosProviderProps) => {
     }
   };
 
-  const updateUsuario = async (id: number, dataForm: UsuarioUpdate) => {
+  const updateUsuario = async (id: string, dataForm: UsuarioUpdate) => {
     try {
       setLoading(true);
       const token = cookies.get("token");
@@ -233,7 +230,6 @@ export const UsuariosProvider = ({ children }: UsuariosProviderProps) => {
         openModalCreate,
         openModalInfo,
         usuarios,
-        methodsUsuario,
         currentUsuario,
         roles,
         entrenadores,

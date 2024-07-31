@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import { FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { GiWeightLiftingUp } from "react-icons/gi";
+import { FaUserCircle } from "react-icons/fa";
 
 const SidebarCliente = () => {
   return (
@@ -39,6 +40,24 @@ const SidebarCliente = () => {
                 fontWeight={"bold"}
               >
                 RUTINAS
+              </Typography>
+            </div>
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/inicio/perfil"
+            className="block p-2 hover:bg-orange-200 rounded"
+          >
+            <div className="flex">
+              <FaUserCircle className="text-2xl mr-4 mt-0.5" />
+              <Typography
+                variant="h6"
+                component="h2"
+                align="left"
+                fontWeight={"bold"}
+              >
+                PERFIL
               </Typography>
             </div>
           </Link>

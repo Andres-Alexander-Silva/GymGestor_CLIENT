@@ -10,7 +10,6 @@ import { Private, Public } from "./routes/privatizationRoutes";
 import Login from "./public/Login/page/Login";
 import { LoginProvider } from "./public/Login/context/LoginContext";
 import { HomePrivate } from "./private/page";
-import { UsuariosProvider } from "./private/Usuarios/context/UsuariosContext";
 
 function App() {
   return (
@@ -41,9 +40,7 @@ function App() {
             path="/inicio/*"
             element={
               <Private>
-                <UsuariosProvider>
-                  <HomePrivate />
-                </UsuariosProvider>
+                <HomePrivate />
               </Private>
             }
           />
