@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { MdOutlineSearch } from "react-icons/md";
 import {
   Box,
-  Button,
   Card,
   InputAdornment,
   OutlinedInput,

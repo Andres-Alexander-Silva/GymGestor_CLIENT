@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, CardMedia } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import { Rutina } from "../interface/clientes.interface";
 import Ejercicio from "../../../global/assets/ejercicio.jpeg";
 
